@@ -16,7 +16,7 @@ final class Preferences: ObservableObject {
     }
 
     @Published var isTrusted = Accessibility.isTrusted(prompt: false)
-    @Published private(set) var loginItemStatus = SMAppService.mainApp.status
+    @Published var loginItemStatus = SMAppService.mainApp.status
     @Published private(set) var loginItemError: String?
 
     private init() {

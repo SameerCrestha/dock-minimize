@@ -1,26 +1,83 @@
 # DockMinimize
 
-Click an app's Dock icon to minimize it, like the Windows taskbar. Free and open source.
+Click the Dock icon of the app you are using, and its windows minimize. Like the taskbar on Windows.
 
-- **App in front, windows open:** click its Dock icon and all its windows minimize together. It uses the app's own Minimize All (⌥⌘M). Apps without it get each window minimized in turn.
-- **Windows minimized, or app in the back:** the Dock works as usual, so a click brings back the last window.
+Free, open source, and it does that one thing.
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/settings-dark.png">
+    <img src="docs/settings-light.png" alt="DockMinimize settings window" width="480">
+  </picture>
+</p>
+
+## Why I made it
+
+On Windows you click an app in the taskbar to tuck it away. On a Mac, clicking the Dock icon of the app in front does nothing.
+
+The apps that add this either cost money, like Click2Minimize, or bundle it with a lot more: window previews, app switchers, gestures, snapping. I wanted one small change to the Dock, for free, and nothing else.
+
+So DockMinimize:
+
+- changes one click and leaves the rest of the Dock alone
+- has no menu bar icon, no account, no network access and no tracking
+- is about 500 lines of Swift you can read in one sitting
+
+## What it does
+
+- **Click the Dock icon of the app in front:** all its windows minimize together. It uses the app's own Minimize All (⌥⌘M), so they animate at the same time. Apps without Minimize All get each window minimized in turn.
+- **Every other click works as usual.** Click an app in the back to switch to it. Click an app whose windows are minimized and macOS brings the last one back.
 - **Hold any modifier key** (⌘ ⌥ ⌃ ⇧) for the normal Dock click, for example to drag an icon.
-
-No menu bar icon. It runs in the background. Open DockMinimize again (Launchpad, Spotlight or Applications) to see its window, where you can:
-
-- check Accessibility access
-- turn it off, or stop it starting at login (on by default)
-- exclude apps, so a Dock click on them works as usual
-- quit it: the Quit button closes DockMinimize and stops it completely. Closing the window, ⌘Q or Quit in the Dock only close the window.
+- **Exclude apps** that should keep the normal click.
 
 ## Install
 
-1. Download `DockMinimize-<version>.dmg` from [Releases](../../releases).
-2. Open it and drag **DockMinimize** to **Applications**.
-3. The first time, right-click the app and choose **Open**. The app is not notarized by Apple, so a double-click is blocked. If macOS still refuses, go to System Settings → Privacy & Security and click **Open Anyway**.
-4. Allow it in System Settings → Privacy & Security → **Accessibility**. It needs this to see Dock clicks and minimize windows.
+Needs macOS 13 or later, on Apple Silicon or Intel.
 
-Needs macOS 13 or later. Works on Apple Silicon and Intel.
+1. Download `DockMinimize-<version>.dmg` from the [latest release](https://github.com/SameerCrestha/dock-minimize/releases/latest).
+2. Open it and drag **DockMinimize** to **Applications**.
+3. Open DockMinimize from Applications. The first time, macOS blocks it with "Apple could not verify…". This is because the app is not notarized, which needs a paid Apple developer account.
+   - Click **Done**.
+   - Go to System Settings → **Privacy & Security**, scroll down, and click **Open Anyway** next to DockMinimize.
+   - Confirm with **Open Anyway** and your password. You only do this once.
+4. The DockMinimize window opens. Under **Access**, click **Open Accessibility Settings** and switch **DockMinimize** on. The window turns green.
+5. That's it. Close the window and DockMinimize keeps working. It also starts at login.
+
+## Use
+
+- Open DockMinimize again (Launchpad, Spotlight or Applications) to see its window. From there you can:
+  - check Accessibility access
+  - turn it off, or stop it starting at login (on by default)
+  - exclude apps
+  - quit it
+- Closing the window, ⌘Q or Quit in the Dock only close the window. DockMinimize keeps working.
+- The **Quit DockMinimize** button closes it and stops it completely, until you open it again or log in.
+
+## Update
+
+Download the new `.dmg` and replace the app in Applications. Accessibility access stays on, because every release is signed with the same certificate.
+
+If the window says it needs access while the switch is already on, select DockMinimize in the Accessibility list, click **−**, then **+** to add it again.
+
+## Uninstall
+
+1. Open DockMinimize and click **Quit DockMinimize**.
+2. Drag it from Applications to the Trash.
+3. Optional: remove it from System Settings → Privacy & Security → **Accessibility**, and from General → **Login Items**.
+
+## FAQ
+
+**Why does it need Accessibility access?**
+To see which Dock icon you clicked, and to minimize windows. It has no network code, so nothing leaves your Mac.
+
+**Why does a second click bring back only one window?**
+That is what macOS does. DockMinimize only changes the click that minimizes, and leaves bringing windows back to the Dock.
+
+**An app minimizes its windows one by one.**
+That app has no Minimize All, so DockMinimize minimizes each window itself. Add it to Excluded apps if you prefer the normal click there.
+
+**Does it work with "Minimize windows into application icon"?**
+Yes, with that setting on or off.
 
 ## Build from source
 
@@ -30,6 +87,7 @@ Needs the Xcode Command Line Tools (`xcode-select --install`).
 scripts/run-local.sh     # build, clear the old Accessibility grant, start the app
 scripts/build-app.sh     # build build/DockMinimize.app
 scripts/make-dmg.sh      # pack it into build/DockMinimize-<version>.dmg
+scripts/screenshot.sh    # render the settings window into docs/ for this README
 ```
 
 ### Signing
@@ -54,7 +112,7 @@ rm cert.cnf key.pem cert.pem && chmod 600 signing.*
 Logs:
 
 ```sh
-log stream --level info --predicate 'subsystem == "io.github.sameercrestha.dockminimize"'
+/usr/bin/log stream --level info --predicate 'subsystem == "io.github.sameercrestha.dockminimize"'
 ```
 
 ## Release
