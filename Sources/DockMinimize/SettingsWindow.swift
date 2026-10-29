@@ -115,8 +115,10 @@ struct SettingsView: View {
             }
 
             Section {
+                Text("Closing this window keeps DockMinimize working. Open it again to come back here.")
+                    .foregroundStyle(.secondary)
                 HStack {
-                    Text("Closing this window keeps DockMinimize working. Open it again to come back here.")
+                    Text("Quit closes DockMinimize and stops it completely. It starts again when you open it, or at login.")
                         .foregroundStyle(.secondary)
                     Spacer()
                     Button("Quit DockMinimize") {

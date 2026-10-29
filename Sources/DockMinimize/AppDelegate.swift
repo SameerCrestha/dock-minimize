@@ -14,6 +14,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         AXUIElementSetMessagingTimeout(AXUIElementCreateSystemWide(), 0.3)
 
         setUpMainMenu()
+        Preferences.shared.enableLaunchAtLoginOnFirstRun()
         if Accessibility.isTrusted(prompt: true) {
             startMonitor()
         } else {

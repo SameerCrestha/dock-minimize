@@ -9,9 +9,9 @@ Click an app's Dock icon to minimize it, like the Windows taskbar. Free and open
 No menu bar icon. It runs in the background. Open DockMinimize again (Launchpad, Spotlight or Applications) to see its window, where you can:
 
 - check Accessibility access
-- turn it off, or start it at login
+- turn it off, or stop it starting at login (on by default)
 - exclude apps, so a Dock click on them works as usual
-- quit it (closing the window, ⌘Q or Quit in the Dock only close the window)
+- quit it: the Quit button closes DockMinimize and stops it completely. Closing the window, ⌘Q or Quit in the Dock only close the window.
 
 ## Install
 

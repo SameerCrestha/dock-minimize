@@ -41,6 +41,13 @@ final class Preferences: ObservableObject {
         loginItemStatus = SMAppService.mainApp.status
     }
 
+    /// Launch at login is on by default. Done once, so turning it off later sticks.
+    func enableLaunchAtLoginOnFirstRun() {
+        guard !defaults.bool(forKey: "launchAtLoginDefaultApplied") else { return }
+        defaults.set(true, forKey: "launchAtLoginDefaultApplied")
+        if !launchesAtLogin { setLaunchAtLogin(true) }
+    }
+
     func isExcluded(_ app: NSRunningApplication) -> Bool {
         guard let bundleID = app.bundleIdentifier else { return false }
         return excludedBundleIDs.contains(bundleID)
