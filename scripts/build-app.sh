@@ -30,14 +30,22 @@ config="$HOME/.config/dock-minimize"
 p12="${SIGNING_P12:-$config/signing.p12}"
 if [[ -f "$p12" ]]; then
   password="${SIGNING_P12_PASSWORD:-$(cat "$config/signing.pass")}"
-  # A throwaway keychain, so the login keychain is never touched.
+  password=$(printf '%s' "$password" | tr -d '\r\n')
+  # A throwaway keychain, so the login keychain is never touched. codesign only finds
+  # identities in keychains on the search list, so it joins the list until the script ends.
   keychain="$(mktemp -d)/signing.keychain-db"
   keychain_password=$(uuidgen)
+  original_keychains=$(security list-keychains -d user | tr -d '"')
   security create-keychain -p "$keychain_password" "$keychain"
-  trap 'security delete-keychain "$keychain" 2>/dev/null || true' EXIT
+  trap 'security list-keychains -d user -s $original_keychains; security delete-keychain "$keychain" 2>/dev/null || true' EXIT
+  security list-keychains -d user -s "$keychain" $original_keychains
   security unlock-keychain -p "$keychain_password" "$keychain"
   security import "$p12" -k "$keychain" -P "$password" -T /usr/bin/codesign >/dev/null
   security set-key-partition-list -S apple-tool:,apple: -s -k "$keychain_password" "$keychain" >/dev/null
+  security find-identity -p codesigning "$keychain" | grep -c "DockMinimize Signing" >/dev/null || {
+    echo "The .p12 has no DockMinimize Signing identity (wrong file or password?)" >&2
+    exit 1
+  }
   codesign --force --options runtime --keychain "$keychain" --sign "DockMinimize Signing" "$APP"
 else
   echo "No signing certificate, signing ad-hoc" >&2
