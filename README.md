@@ -1,8 +1,11 @@
 # DockMinimize
 
-Click the Dock icon of the app you are using, and its windows minimize. Like the taskbar on Windows.
+**A free macOS app: click the Dock icon of the app you are using, and its windows minimize.** Like the taskbar on Windows.
 
-Free, open source, and it does that one thing.
+<p align="center">
+  <a href="https://github.com/SameerCrestha/dock-minimize/releases/latest/download/DockMinimize.dmg"><img src="https://img.shields.io/badge/Download_for_macOS-0A84FF?style=for-the-badge&logo=apple&logoColor=white" alt="Download for macOS"></a>
+</p>
+<p align="center">macOS 13 or later · Apple Silicon and Intel · Free and open source</p>
 
 <p align="center">
   <picture>
@@ -20,7 +23,7 @@ The apps that add this either cost money, like Click2Minimize, or bundle it with
 So DockMinimize:
 
 - changes one click and leaves the rest of the Dock alone
-- has no menu bar icon, no account, no network access and no tracking
+- has no menu bar icon, no account and no tracking. Its only network use is a daily check for a new version.
 - is about 500 lines of Swift you can read in one sitting
 
 ## What it does
@@ -34,7 +37,7 @@ So DockMinimize:
 
 Needs macOS 13 or later, on Apple Silicon or Intel.
 
-1. Download `DockMinimize-<version>.dmg` from the [latest release](https://github.com/SameerCrestha/dock-minimize/releases/latest).
+1. Click **Download for macOS** at the top, or get `DockMinimize.dmg` from the [latest release](https://github.com/SameerCrestha/dock-minimize/releases/latest).
 2. Open it and drag **DockMinimize** to **Applications**.
 3. Open DockMinimize from Applications. The first time, macOS blocks it with "Apple could not verify…". This is because the app is not notarized, which needs a paid Apple developer account.
    - Click **Done**.
@@ -48,6 +51,7 @@ Needs macOS 13 or later, on Apple Silicon or Intel.
 - Open DockMinimize again (Launchpad, Spotlight or Applications) to see its window. From there you can:
   - check Accessibility access
   - turn it off, or stop it starting at login (on by default)
+  - check for updates
   - exclude apps
   - quit it
 - Closing the window, ⌘Q or Quit in the Dock only close the window. DockMinimize keeps working.
@@ -55,7 +59,11 @@ Needs macOS 13 or later, on Apple Silicon or Intel.
 
 ## Update
 
-Download the new `.dmg` and replace the app in Applications. Accessibility access stays on, because every release is signed with the same certificate.
+DockMinimize checks GitHub for a new version once a day. When one is out, you get a notification.
+
+- Open DockMinimize and click **Install**. It downloads the update, checks it is signed by the same developer, replaces itself and restarts. Accessibility access stays on.
+- Or switch on **Install updates automatically** and skip the click.
+- Or download the new `DockMinimize.dmg` yourself and replace the app in Applications.
 
 If the window says it needs access while the switch is already on, select DockMinimize in the Accessibility list, click **−**, then **+** to add it again.
 
@@ -68,7 +76,10 @@ If the window says it needs access while the switch is already on, select DockMi
 ## FAQ
 
 **Why does it need Accessibility access?**
-To see which Dock icon you clicked, and to minimize windows. It has no network code, so nothing leaves your Mac.
+To see which Dock icon you clicked, and to minimize windows. Nothing about your windows or clicks leaves your Mac.
+
+**Does it connect to the internet?**
+Only to check GitHub for a new version once a day, and to download an update when you install one.
 
 **Why does a second click bring back only one window?**
 That is what macOS does. DockMinimize only changes the click that minimizes, and leaves bringing windows back to the Dock.

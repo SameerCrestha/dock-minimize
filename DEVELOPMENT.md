@@ -9,7 +9,7 @@ Needs the Xcode Command Line Tools (`xcode-select --install`).
 ```sh
 scripts/run-local.sh     # build, clear the old Accessibility grant, start the app
 scripts/build-app.sh     # build build/DockMinimize.app
-scripts/make-dmg.sh      # pack it into build/DockMinimize-<version>.dmg
+scripts/make-dmg.sh      # pack it into build/DockMinimize.dmg
 scripts/screenshot.sh    # render the settings window into docs/ for the README
 ```
 
@@ -50,6 +50,14 @@ The workflow needs two repository secrets (Settings â†’ Secrets and variables â†
 ```sh
 git tag v0.1.0 && git push origin v0.1.0
 ```
+
+## Updates
+
+`Updater.swift` reads `releases/latest` from the GitHub API once a day. If the tag is newer than the app's version, it offers the release's `.dmg`. Installing mounts it, checks the new app meets the running app's designated requirement (same bundle ID, same certificate), swaps it in place and relaunches with `--updated`, which starts quietly.
+
+- Release assets must be named `DockMinimize.dmg`. The README's download button links to `releases/latest/download/DockMinimize.dmg`.
+- The repo's releases must be public. The API returns nothing for a private repo, so checks fail quietly.
+- Ad-hoc builds cannot update themselves, because their designated requirement is a hash of that exact build.
 
 ## How it works
 

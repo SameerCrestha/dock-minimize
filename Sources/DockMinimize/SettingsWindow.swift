@@ -36,6 +36,7 @@ final class SettingsWindowController: NSObject, NSWindowDelegate {
 
 struct SettingsView: View {
     @ObservedObject var prefs: Preferences
+    @ObservedObject var updater: Updater = .shared
 
     var body: some View {
         Form {
@@ -85,6 +86,18 @@ struct SettingsView: View {
                 }
             }
 
+            Section("Updates") {
+                HStack {
+                    Text("Version \(updater.currentVersion)")
+                    Spacer()
+                    updateStatus
+                }
+                if case .failed(let message) = updater.status {
+                    Text(message).font(.caption).foregroundStyle(.red)
+                }
+                Toggle("Install updates automatically", isOn: $updater.installsAutomatically)
+            }
+
             Section {
                 if prefs.excludedBundleIDs.isEmpty {
                     Text("None").foregroundStyle(.secondary)
@@ -129,7 +142,29 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
-        .frame(width: 480, height: 670)
+        .frame(width: 480, height: 790)
+    }
+
+    @ViewBuilder private var updateStatus: some View {
+        switch updater.status {
+        case .checking:
+            ProgressView().controlSize(.small)
+        case .available(let version):
+            Button("Install \(version)") { updater.install() }
+                .buttonStyle(.borderedProminent)
+        case .installing:
+            HStack {
+                ProgressView().controlSize(.small)
+                Text("Installing…").foregroundStyle(.secondary)
+            }
+        case .upToDate:
+            HStack {
+                Text("Up to date").foregroundStyle(.secondary)
+                Button("Check Now") { updater.check(manual: true) }
+            }
+        case .idle, .failed:
+            Button("Check Now") { updater.check(manual: true) }
+        }
     }
 
     private func addApps() {

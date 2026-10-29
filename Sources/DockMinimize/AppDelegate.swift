@@ -21,8 +21,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             waitForAccessibility()
         }
 
-        // At login it starts quietly. Any other launch shows the window, so whoever opened it sees it.
-        if !launchedAsLoginItem || !Preferences.shared.isTrusted {
+        Updater.shared.onNotificationClick = { [weak self] in self?.settingsWindow.show() }
+        Updater.shared.startDailyChecks()
+
+        // At login and after an update it starts quietly. Any other launch shows the window,
+        // so whoever opened it sees it.
+        let quietLaunch = launchedAsLoginItem || CommandLine.arguments.contains("--updated")
+        if !quietLaunch || !Preferences.shared.isTrusted {
             settingsWindow.show()
         }
     }
