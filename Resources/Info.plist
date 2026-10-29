@@ -4,15 +4,17 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>DockMinimize</string>
 	<key>CFBundleExecutable</key>
 	<string>DockMinimize</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>io.github.sameercrestha.dockminimize</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>DockMinimize</string>
-	<key>CFBundleDisplayName</key>
 	<string>DockMinimize</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
