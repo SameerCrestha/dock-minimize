@@ -11,10 +11,11 @@ symlinks = {"Applications": "/Applications"}
 
 # dmgbuild picks up background@2x.png next to it for Retina screens.
 background = defines["background"]  # noqa: F821
-window_rect = ((200, 160), (600, 380))
+# The height includes the title bar, so it hides the bottom of the 600x420 picture.
+window_rect = ((200, 160), (600, 420))
 icon_size = 128
 text_size = 14
 icon_locations = {
-    app_name: (150, 170),
-    "Applications": (450, 170),
+    app_name: (150, 168),
+    "Applications": (450, 168),
 }
