@@ -47,7 +47,7 @@ struct SettingsView: View {
                         .foregroundStyle(.tint)
                     VStack(alignment: .leading, spacing: 3) {
                         Text("DockMinimize").font(.title2.bold())
-                        Text("Click the Dock icon of the app in front to minimize all its windows.")
+                        Text("Click to minimize: click an app's icon in the Dock to minimize its windows.")
                             .foregroundStyle(.secondary)
                     }
                 }

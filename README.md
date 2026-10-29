@@ -1,11 +1,11 @@
 # DockMinimize
 
-**A free macOS app: click the Dock icon of the app you are using, and its windows minimize.** Like the taskbar on Windows.
+**Click to minimize for macOS.** Click an app's icon in the Dock and its windows minimize, like the taskbar on Windows.
 
 <p align="center">
   <a href="https://github.com/SameerCrestha/dock-minimize/releases/latest/download/DockMinimize.dmg"><img src="https://img.shields.io/badge/Download_for_macOS-0A84FF?style=for-the-badge&logo=apple&logoColor=white" alt="Download for macOS"></a>
 </p>
-<p align="center">macOS 13 or later · Apple Silicon and Intel · Free and open source</p>
+<p align="center">macOS 13 or later · Apple Silicon and Intel · Open source</p>
 
 <p align="center">
   <picture>
@@ -16,7 +16,7 @@
 
 ## Why I made it
 
-On Windows you click an app in the taskbar to tuck it away. On a Mac, clicking the Dock icon of the app in front does nothing.
+On Windows you click an app in the taskbar to tuck it away. On a Mac, clicking the Dock icon of the app you are using does nothing.
 
 The apps that add this either cost money, like Click2Minimize, or bundle it with a lot more: window previews, app switchers, gestures, snapping. I wanted one small change to the Dock, for free, and nothing else.
 
@@ -28,7 +28,7 @@ So DockMinimize:
 
 ## What it does
 
-- **Click the Dock icon of the app in front:** all its windows minimize together. It uses the app's own Minimize All (⌥⌘M), so they animate at the same time. Apps without Minimize All get each window minimized in turn.
+- **Click the Dock icon of the app you are using:** all its windows minimize together. It uses the app's own Minimize All (⌥⌘M), so they animate at the same time. Apps without Minimize All get each window minimized in turn.
 - **Every other click works as usual.** Click an app in the back to switch to it. Click an app whose windows are minimized and macOS brings the last one back.
 - **Hold any modifier key** (⌘ ⌥ ⌃ ⇧) for the normal Dock click, for example to drag an icon.
 - **Exclude apps** that should keep the normal click.
