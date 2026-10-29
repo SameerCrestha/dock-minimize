@@ -10,8 +10,15 @@ enum DockClickHandler {
     /// - App in front with open windows: minimize all of them.
     /// - Anything else (including bringing minimized windows back): the Dock handles the click as usual.
     static func handle(at point: CGPoint) -> Bool {
-        guard let app = DockHitTest.runningApp(at: point), !app.isHidden else { return false }
+        guard let app = DockHitTest.runningApp(at: point),
+              !app.isHidden,
+              app.processIdentifier != NSRunningApplication.current.processIdentifier
+        else { return false }
         let name = app.localizedName ?? "app"
+        if Preferences.shared.isExcluded(app) {
+            log.notice("\(name, privacy: .public): excluded, Dock handles the click")
+            return false
+        }
 
         guard let windows = AppWindows.list(pid: app.processIdentifier) else {
             log.notice("\(name, privacy: .public): could not read windows, Dock handles the click")

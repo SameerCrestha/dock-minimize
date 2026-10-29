@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Rebuilds and starts the app for local testing.
-# An ad-hoc build has a new signature each time, so the old Accessibility grant stops working.
-# Then this clears it, and macOS asks again on launch. With the "DockMinimize Dev" cert the grant is kept.
+# With the signing certificate the Accessibility grant is kept. An ad-hoc build has a new signature
+# each time, so then this clears the old grant and macOS asks again on launch.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

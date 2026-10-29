@@ -15,7 +15,17 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build app
-        run: ARCHS="arm64 x86_64" VERSION="${GITHUB_REF_NAME#v}" scripts/build-app.sh
+        env:
+          SIGNING_P12_BASE64: ${{ secrets.SIGNING_P12_BASE64 }}
+          SIGNING_P12_PASSWORD: ${{ secrets.SIGNING_P12_PASSWORD }}
+        run: |
+          # Every release must use the same certificate, or users lose the Accessibility grant on update.
+          if [ -z "$SIGNING_P12_BASE64" ]; then
+            echo "::error::Secret SIGNING_P12_BASE64 is missing"
+            exit 1
+          fi
+          echo "$SIGNING_P12_BASE64" | base64 --decode > "$RUNNER_TEMP/signing.p12"
+          SIGNING_P12="$RUNNER_TEMP/signing.p12" ARCHS="arm64 x86_64" VERSION="${GITHUB_REF_NAME#v}" scripts/build-app.sh
 
       - name: Build DMG
         run: scripts/make-dmg.sh

@@ -3,8 +3,6 @@ import AppKit
 /// Watches left clicks system-wide. A click on a Dock icon that DockMinimize acts on is
 /// swallowed (down, drags and up), so the Dock never sees it and cannot undo the action.
 final class DockClickMonitor {
-    var isEnabled = true
-
     private var tap: CFMachPort?
     private var swallowingClick = false
 
@@ -38,7 +36,7 @@ final class DockClickMonitor {
             swallowingClick = false
             // Any modifier key gives the normal Dock click (drag to reorder, Option-click, ...).
             let modifiers: CGEventFlags = [.maskCommand, .maskAlternate, .maskControl, .maskShift]
-            if isEnabled, event.flags.intersection(modifiers).isEmpty, DockClickHandler.handle(at: event.location) {
+            if Preferences.shared.isEnabled, event.flags.intersection(modifiers).isEmpty, DockClickHandler.handle(at: event.location) {
                 swallowingClick = true
                 return nil
             }
