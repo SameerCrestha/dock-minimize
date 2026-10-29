@@ -74,9 +74,12 @@ func drawCentered(_ text: String, y: CGFloat, font: NSFont, color: NSColor) {
     .font: font, .foregroundColor: color, .paragraphStyle: para, .shadow: shadow,
   ]).draw(in: CGRect(x: 0, y: y, width: size.width, height: font.pointSize * 1.5))
 }
-drawCentered("Drag DockMinimize to Applications", y: 292,
+drawCentered("Drag DockMinimize to Applications", y: 288,
              font: .systemFont(ofSize: 20, weight: .semibold), color: rgb(0xFFFFFF))
-drawCentered("Then open it from your Applications folder.", y: 324,
+// The app is not notarized, so the first open is blocked until "Open Anyway".
+drawCentered("Not notarized, so macOS blocks the first open. Click Done, then go to", y: 320,
+             font: .systemFont(ofSize: 13, weight: .regular), color: rgb(0xFFFFFF, 0.85))
+drawCentered("System Settings → Privacy & Security and click Open Anyway.", y: 339,
              font: .systemFont(ofSize: 13, weight: .regular), color: rgb(0xFFFFFF, 0.85))
 
 let rep = NSBitmapImageRep(cgImage: ctx.makeImage()!)

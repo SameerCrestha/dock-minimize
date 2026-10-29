@@ -8,6 +8,10 @@
   <img src="https://img.shields.io/badge/Apple_Silicon_%2B_Intel-0A84FF?style=flat-square" alt="Apple Silicon and Intel">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0A84FF?style=flat-square" alt="MIT license"></a>
 </p>
+<p align="center">
+  <strong>First open:</strong> DockMinimize is not notarized, so macOS blocks it with "Apple could not verify…".<br>
+  Click <strong>Done</strong>, then go to System Settings → <strong>Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. You only do this once. <a href="#install">Full steps</a>
+</p>
 
 <p align="center">
   <em><strong>Click to minimize for macOS.</strong> Click an app's icon in the Dock and its windows minimize, like the taskbar on Windows. A small Swift app with no menu bar icon and no tracking.</em>
