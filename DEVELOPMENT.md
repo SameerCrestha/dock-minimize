@@ -11,6 +11,7 @@ scripts/run-local.sh     # build, clear the old Accessibility grant, start the a
 scripts/build-app.sh     # build build/DockMinimize.app
 scripts/make-dmg.sh      # pack it into build/DockMinimize.dmg
 scripts/screenshot.sh    # render the settings window into docs/ for the README
+swift scripts/demo-gif.swift docs/demo.gif 1.5   # draw the README demo GIF
 ```
 
 Logs:

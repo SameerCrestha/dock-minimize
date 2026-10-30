@@ -9,20 +9,15 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0A84FF?style=flat-square" alt="MIT license"></a>
 </p>
 <p align="center">
-  <strong>First open:</strong> DockMinimize is not notarized, so macOS blocks it with "Apple could not verify…".<br>
-  Click <strong>Done</strong>, then go to System Settings → <strong>Privacy &amp; Security</strong> and click <strong>Open Anyway</strong>. You only do this once. <a href="#install">Full steps</a>
-</p>
-
-<p align="center">
   <em><strong>Click to minimize for macOS.</strong> Click an app's icon in the Dock and its windows minimize, like the taskbar on Windows. A small Swift app with no menu bar icon and no tracking.</em>
 </p>
 
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/settings-dark.png">
-    <img src="docs/settings-light.png" alt="DockMinimize settings window" width="480">
-  </picture>
+  <img src="docs/demo.gif" alt="Clicking an app's Dock icon minimizes all its windows" width="720">
 </p>
+
+> [!IMPORTANT]
+> I don't have a paid Apple Developer account, so DockMinimize is not notarized. The first time you open it, macOS says "Apple could not verify…". This is expected. One Terminal command fixes it, and you only do it once. See [First open](#first-open).
 
 ## What it does
 
@@ -68,14 +63,47 @@ Needs macOS 13 or later, on Apple Silicon or Intel.
 
 1. Click **Download for macOS** at the top, or get `DockMinimize.dmg` from the [latest release](https://github.com/SameerCrestha/dock-minimize/releases/latest).
 2. Open it and drag **DockMinimize** to **Applications**.
-3. Open DockMinimize from Applications. The first time, macOS blocks it with "Apple could not verify…". This is because the app is not notarized, which needs a paid Apple developer account.
-   - Click **Done**.
-   - Go to System Settings → **Privacy & Security**, scroll down, and click **Open Anyway** next to DockMinimize.
-   - Confirm with **Open Anyway** and your password. You only do this once.
-4. The DockMinimize window opens. Under **Access**, click **Open Accessibility Settings** and switch **DockMinimize** on. The window turns green.
+3. Let macOS open it. See [First open](#first-open) just below.
+4. Open DockMinimize. Under **Access**, click **Open Accessibility Settings** and switch **DockMinimize** on. The window turns green.
 5. That's it. Close the window and DockMinimize keeps working. It also starts at login.
 
+### First open
+
+> [!IMPORTANT]
+> I don't have a paid Apple Developer account, so DockMinimize is not notarized. macOS warns that "Apple could not verify…" the first time you open it. This is expected.
+>
+> You need to get past this once before the app opens. Use one of the two ways below.
+
+#### Recommended: Terminal (always works)
+
+The quickest way. One command, and it works every time. System Settings sometimes has no **Open Anyway** button.
+
+After you drag DockMinimize to Applications, run:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/DockMinimize.app
+```
+
+Then open DockMinimize as usual.
+
+#### Other way: System Settings
+
+> [!NOTE]
+> This does not work for everyone. If it fails, use the Terminal command above.
+
+1. Open DockMinimize. macOS shows "Apple could not verify…". Click **Done**.
+2. Go to System Settings → **Privacy & Security**.
+3. Scroll down and click **Open Anyway** next to DockMinimize.
+4. Confirm with **Open Anyway** and your password.
+
 ## Use
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/settings-dark.png">
+    <img src="docs/settings-light.png" alt="DockMinimize settings window" width="480">
+  </picture>
+</p>
 
 - Open DockMinimize again (Launchpad, Spotlight or Applications) to see its window. From there you can:
   - check Accessibility access
